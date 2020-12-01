@@ -1,0 +1,74 @@
+ctrl shift p to make flutter project
+changed dependency from android->app->build.gradle ; in defaultConfig the applicationId(keep it unique)
+add that google_services.json file in the required location(this file will tell which backend to connect to)
+open build.gradle in android folder(not the one in android->app)
+change dependencies to classpath 'com.google.gms:google-services:4.0.1' (problem with other version)
+
+now open android->app->build.gradle and do the told changes
+change min sdk version to 21 in defaultConfig class
+
+install flutter packages to interact firebase at the backend ->firebase_auth & cloud_firestore
+
+myapp - root widget
+wrapper widget - listen for authentication(user logged in or logged out)
+depending on the logged in status:
+authenticate screen - not logged in:
+	sign in
+	register
+home screen - logged in: (going to wrap the following widget)
+	brewlist widget- show the hot drink preferences
+	settings widget - update the data
+
+
+#########$$$$$$#########
+root : main.dart
+wrapper is the widget which listens to auth changes and will either show home.dart or authenticate.dart
+
+enable authentication methods in firebase project
+in sign in method enable email/password and anonymous
+
+a separate class will handle all the diff authentication phases{auth.dart}
+
+//"current_key": "AIzaSyCpnU45ILsKkhFM_rYPKvfU6rovAk_LYvs"
+
+we got an object in which a lot of info we don't need. so now when we receive 
+the result, we want to convert it into an object which just contains the info we need(uid over here)
+and create a user class(for this purpose, we create user.dart)
+
+
+stream b/w flutter app and firebase auth service. firebase auth service emits everytime when user signs in
+or sign out. when signed out ->returns null, when signed in-> return user object.
+based on these values we get, our flutter app updates the ui appropriately
+firebase auth service has stream built into it by invoking the func called onAuthChange
+
+after setting up auth Stream setup, we want to use it at the root of application to know
+whether the user is logged in or not in and coz then we can display it at wrapper widget either auth or home screen
+to listen to auth changes we gonna use provider package(to install search provider in pub.dev)
+
+firestore database setup:
+cloud firestore, start in test mode, select central usa
+we can have collection for different data(for ex-user data, book data for book website)
+each collection has documents and each document will represent one record in that collection
+each record/document will look like an object(i.e. for one person)
+each record/document will represent one particular user
+record will have key-value pair(ex-strength is the key and its number will be the value)
+
+after new user registers, create new record in the brews collection for that user(initially 0 sugar & 0 strength)
+
+linking of firebase user and firestore document(after sign up we get unique id, take that id and create new
+document in the brews collection)
+
+set up a stream to the firestore document, listening to the data and pre populating the form with the initial
+data->so we will create the stream in database service class and also create user data model
+
+different way of listening to stream and using the data:stream builder
+we only need to access stream data in this widget(form widget) and not any other widgets by 
+declaring like Provider.of...(to access in different widgets)
+
+when we first start, and the bottom sheets widget first loads, we don't assign values to the 3 values. They are null
+to begin with, and if we don't edit it, then when we update it, we are saving null values to the DB. This should not
+happen. They should have a value, if not then we'll provide fallback value and we'll save that to the databae
+
+After pressing update, it updates in the home as well. the if condition in onPressed of 'Update',sends the data to DB,
+to the firestore collection brews,finds the record with the given id and updates those values. we have an active stream
+inside home which listens for data changes for brews
