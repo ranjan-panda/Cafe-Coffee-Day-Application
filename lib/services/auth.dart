@@ -40,7 +40,7 @@ class AuthService {
   Future signInAnon() async {
     try {
       AuthResult result = await _auth
-          .signInAnonymously(); //signinAnomously returns an Authresult object
+          .signInAnonymously(); //signinAnonymously returns an Authresult object
       FirebaseUser user = result.user;
       //return user;  //now we will return custom user id instead of firebase user object
       return _userFromFirebaseUser(user);

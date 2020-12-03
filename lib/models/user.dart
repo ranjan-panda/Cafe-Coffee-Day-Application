@@ -13,6 +13,6 @@ class UserData {
   final int strength;
 
   UserData({this.uid, this.sugars, this.name, this.strength});
-  //very similar to brew model(except the uid), we could have used brew model itself
+  //very similar to brew model(except the uid is new added property), we could have used brew model itself
   //but made another one, since we can extend one model independent of the other
 }
