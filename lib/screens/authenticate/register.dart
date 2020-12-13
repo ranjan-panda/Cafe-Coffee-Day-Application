@@ -28,7 +28,8 @@ class _RegisterState extends State<Register> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
-              title: Text('Sign up to Brew Crew'),
+              title: Text('Sign up to Café Coffee Day',
+                  style: TextStyle(fontSize: 18.5)),
               actions: [
                 FlatButton.icon(
                   icon: Icon(Icons.person),
@@ -53,13 +54,11 @@ class _RegisterState extends State<Register> {
                   decoration: InputDecoration(
                     hintText: 'Email',
                     fillColor:
-                        Colors.white, //will only work when filled is true
+                        Colors.white,
                     filled: true,
-                    //enabledBorder is only applying, when the field is not focussed
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 2.0),
                     ),
-                    //border when field is focused
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.pink, width: 2.0),
                     ),
@@ -68,6 +67,7 @@ class _RegisterState extends State<Register> {
                         //will include the above decoration in shared file, constants.dart
 
                         //will add the hintText property with textInputDecoration
+                        //copyWith is the method and you can pass the property in it with its value
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
                         validator: (val) =>

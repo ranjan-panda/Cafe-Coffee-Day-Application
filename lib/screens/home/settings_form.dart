@@ -38,7 +38,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 child: Column(
                   children: [
                     Text(
-                      'Update your brew settings.',
+                      'Update your coffee preference',
                       style: TextStyle(fontSize: 18.0),
                     ),
                     SizedBox(

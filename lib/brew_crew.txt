@@ -29,7 +29,6 @@ in sign in method enable email/password and anonymous
 
 a separate class will handle all the diff authentication phases{auth.dart}
 
-//"current_key": "AIzaSyCpnU45ILsKkhFM_rYPKvfU6rovAk_LYvs"
 
 we got an object in which a lot of info we don't need. so now when we receive 
 the result, we want to convert it into an object which just contains the info we need(uid over here)

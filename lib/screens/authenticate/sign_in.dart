@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
   //now we need to make constructor to accept toggleView as a param
-  //constructor needs to in the widget and not below(which is an object)
+  //constructor needs to be in the widget and not below(which is an object)
   final Function toggleView;
   SignIn({this.toggleView});
 
@@ -21,7 +21,8 @@ class _SignInState extends State<SignIn> {
   //we don't want to keep any values empty, so we will use some flutter built-in validation features
   final _formKey =
       GlobalKey<FormState>(); //identify the key for this form as _formkey
-  //_formKey is the global key and later assigning it to the key of the form
+  //_formKey is the global key and we are going to use this key to identify our form
+  //associate our form with this global form state key
 
   bool loading =
       false; //by default it is false, if it becomes true, then we will show the loading widget
@@ -38,7 +39,8 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.brown[400],
               elevation: 0.0,
-              title: Text('Sign in to Brew Crew'),
+              title: Text('Sign in to Café Coffee Day',
+                  style: TextStyle(fontSize: 18.0)),
               //toggle between register and sign in
               actions: [
                 FlatButton.icon(
@@ -70,7 +72,7 @@ class _SignInState extends State<SignIn> {
         */
               //now making email sign in method
               child: Form(
-                  key: _formKey,
+                  key: _formKey, //will keep track of the state of our form
                   child: Column(
                     children: [
                       SizedBox(
@@ -79,13 +81,15 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                         decoration:
                             textInputDecoration.copyWith(hintText: 'Email'),
+                        //validator properties allow us to run a function, to see if the form field is valid or not
                         //validator is a function which takes val as param
-                        //if it returns null, then it has not empty
+                        //if it returns null, then it is non-empty
                         validator: (val) =>
                             val.isEmpty ? 'Enter an email' : null,
                         onChanged: (val) {
-                          //what happens when this field is changed is decided by onchanged property
-                          //val represents whatever currently is there in the form field
+                          //what happens when this field is changed(i.e. after the user types anything extra,
+                          //or presses the delete key or space key) is decided by onchanged property
+                          //val represents whatever is in the form field at that point
                           setState(() => email =
                               val); //setting email with the current value
                         },
@@ -136,7 +140,6 @@ class _SignInState extends State<SignIn> {
                       Text(
                         error,
                         style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        //while registering, if email is not an email type, it throws the error
                       ),
                     ],
                   )),

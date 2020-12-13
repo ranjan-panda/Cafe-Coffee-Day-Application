@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
           context: context,
           builder: (context) {
             return Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
               child: SettingsForm(),
             );
           });
@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Brew Crew'),
+          title: Text('CCd'),
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           //actions expect a widget list and they are gonna appear at right of appbar

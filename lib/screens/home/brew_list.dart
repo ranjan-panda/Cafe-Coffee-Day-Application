@@ -15,15 +15,15 @@ class _BrewListState extends State<BrewList> {
   Widget build(BuildContext context) {
     //accessing data from stream
     //final brews = Provider.of<QuerySnapshot>(context);
-    //accessing brews instead of snapshots(which is the form of data for firebase)
 
-    final brews = Provider.of<List<Brew>>(context) ?? [];
-    //if they don't exist from the very start, then return the empty list(else will show small error)
-
-    // //print(brews.documents);
+    // //print(brews.documents);//will show all the documents in the collection
     // for (var doc in brews.documents) {
     //   print(doc.data);
     // }
+
+    //accessing brews instead of snapshots(which is the form of data for firebase)
+    final brews = Provider.of<List<Brew>>(context) ?? [];
+    //if they don't exist from the very start, then return the empty list(else will show small error)
 
     /*
     brews.forEach((brew) {

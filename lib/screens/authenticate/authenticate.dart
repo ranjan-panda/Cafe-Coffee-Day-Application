@@ -23,9 +23,8 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     if (showSignIn) {
-      return SignIn(
-          toggleView:
-              toggleView); //parameter name(the one on the left) can be anything(can be toggleView as well)
+      return SignIn(toggleView: toggleView);
+      //parameter name(the one on the left) can be anything(can be toggleView as well)
       //but its value(the toggleView on the right) needs to be the above defined function
     } else {
       return Register(toggleView: toggleView);
